@@ -1,0 +1,445 @@
+[
+  {
+    "system": "trivial",
+    "intent": {
+      "accuracy": 0.223,
+      "accuracy_ci": [
+        0.16818181818181818,
+        0.2818181818181818
+      ],
+      "macro_f1": 0.036,
+      "per_class": {
+        "baggage_issue": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 13
+        },
+        "booking_change": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 11
+        },
+        "flight_disruption": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 33
+        },
+        "loyalty_account": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 4
+        },
+        "other": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 33
+        },
+        "policy_question": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 8
+        },
+        "praise": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 28
+        },
+        "refund_or_compensation": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 36
+        },
+        "seat_or_upgrade": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 5
+        },
+        "service_complaint": {
+          "precision": 0.223,
+          "recall": 1.0,
+          "f1": 0.364,
+          "support": 49
+        }
+      },
+      "confusion": {
+        "praise": {
+          "service_complaint": 28
+        },
+        "other": {
+          "service_complaint": 33
+        },
+        "baggage_issue": {
+          "service_complaint": 13
+        },
+        "service_complaint": {
+          "service_complaint": 49
+        },
+        "seat_or_upgrade": {
+          "service_complaint": 5
+        },
+        "refund_or_compensation": {
+          "service_complaint": 36
+        },
+        "flight_disruption": {
+          "service_complaint": 33
+        },
+        "policy_question": {
+          "service_complaint": 8
+        },
+        "loyalty_account": {
+          "service_complaint": 4
+        },
+        "booking_change": {
+          "service_complaint": 11
+        }
+      }
+    },
+    "routing": {
+      "n": 220,
+      "escalation_precision": 0.0,
+      "escalation_recall": 0.0,
+      "escalation_f1": 0.0,
+      "false_auto_rate": 1.0,
+      "false_auto_count": 63,
+      "needless_escalation_rate": 0.0,
+      "needless_escalation_count": 0,
+      "automation_rate": 1.0,
+      "safe_automation_rate": 0.714,
+      "safe_automation_ci": [
+        0.6544318181818182,
+        0.7727272727272727
+      ],
+      "accuracy": 0.714,
+      "counts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 63,
+        "tn": 157
+      }
+    },
+    "by_stratum": {
+      "representative": {
+        "n": 120,
+        "intent_accuracy": 0.225,
+        "intent_accuracy_ci": [
+          0.15,
+          0.3
+        ],
+        "intent_macro_f1": 0.037,
+        "routing": {
+          "n": 120,
+          "escalation_precision": 0.0,
+          "escalation_recall": 0.0,
+          "escalation_f1": 0.0,
+          "false_auto_rate": 1.0,
+          "false_auto_count": 18,
+          "needless_escalation_rate": 0.0,
+          "needless_escalation_count": 0,
+          "automation_rate": 1.0,
+          "safe_automation_rate": 0.85,
+          "safe_automation_ci": [
+            0.7833333333333333,
+            0.9083333333333333
+          ],
+          "accuracy": 0.85,
+          "counts": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 18,
+            "tn": 102
+          }
+        }
+      },
+      "enriched": {
+        "n": 100,
+        "intent_accuracy": 0.22,
+        "intent_accuracy_ci": [
+          0.15,
+          0.3
+        ],
+        "intent_macro_f1": 0.04,
+        "routing": {
+          "n": 100,
+          "escalation_precision": 0.0,
+          "escalation_recall": 0.0,
+          "escalation_f1": 0.0,
+          "false_auto_rate": 1.0,
+          "false_auto_count": 45,
+          "needless_escalation_rate": 0.0,
+          "needless_escalation_count": 0,
+          "automation_rate": 1.0,
+          "safe_automation_rate": 0.55,
+          "safe_automation_ci": [
+            0.45,
+            0.65
+          ],
+          "accuracy": 0.55,
+          "counts": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 45,
+            "tn": 55
+          }
+        }
+      }
+    }
+  },
+  {
+    "system": "simple",
+    "intent": {
+      "accuracy": 0.418,
+      "accuracy_ci": [
+        0.35454545454545455,
+        0.4909090909090909
+      ],
+      "macro_f1": 0.357,
+      "per_class": {
+        "baggage_issue": {
+          "precision": 0.357,
+          "recall": 0.385,
+          "f1": 0.37,
+          "support": 13
+        },
+        "booking_change": {
+          "precision": 0.364,
+          "recall": 0.364,
+          "f1": 0.364,
+          "support": 11
+        },
+        "flight_disruption": {
+          "precision": 0.526,
+          "recall": 0.606,
+          "f1": 0.563,
+          "support": 33
+        },
+        "loyalty_account": {
+          "precision": 0.167,
+          "recall": 0.25,
+          "f1": 0.2,
+          "support": 4
+        },
+        "other": {
+          "precision": 0.424,
+          "recall": 0.424,
+          "f1": 0.424,
+          "support": 33
+        },
+        "policy_question": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 8
+        },
+        "praise": {
+          "precision": 0.29,
+          "recall": 0.321,
+          "f1": 0.305,
+          "support": 28
+        },
+        "refund_or_compensation": {
+          "precision": 0.733,
+          "recall": 0.611,
+          "f1": 0.667,
+          "support": 36
+        },
+        "seat_or_upgrade": {
+          "precision": 0.286,
+          "recall": 0.4,
+          "f1": 0.333,
+          "support": 5
+        },
+        "service_complaint": {
+          "precision": 0.395,
+          "recall": 0.306,
+          "f1": 0.345,
+          "support": 49
+        }
+      },
+      "confusion": {
+        "praise": {
+          "service_complaint": 6,
+          "praise": 9,
+          "booking_change": 1,
+          "seat_or_upgrade": 1,
+          "other": 7,
+          "baggage_issue": 1,
+          "flight_disruption": 2,
+          "refund_or_compensation": 1
+        },
+        "other": {
+          "praise": 5,
+          "loyalty_account": 2,
+          "service_complaint": 5,
+          "other": 14,
+          "flight_disruption": 4,
+          "policy_question": 1,
+          "seat_or_upgrade": 1,
+          "baggage_issue": 1
+        },
+        "baggage_issue": {
+          "service_complaint": 3,
+          "baggage_issue": 5,
+          "seat_or_upgrade": 1,
+          "booking_change": 1,
+          "praise": 1,
+          "policy_question": 1,
+          "other": 1
+        },
+        "service_complaint": {
+          "booking_change": 2,
+          "service_complaint": 15,
+          "praise": 9,
+          "policy_question": 5,
+          "flight_disruption": 4,
+          "refund_or_compensation": 3,
+          "other": 6,
+          "baggage_issue": 3,
+          "loyalty_account": 2
+        },
+        "seat_or_upgrade": {
+          "seat_or_upgrade": 2,
+          "other": 1,
+          "flight_disruption": 1,
+          "booking_change": 1
+        },
+        "refund_or_compensation": {
+          "refund_or_compensation": 22,
+          "flight_disruption": 4,
+          "praise": 3,
+          "service_complaint": 2,
+          "baggage_issue": 2,
+          "seat_or_upgrade": 1,
+          "policy_question": 2
+        },
+        "flight_disruption": {
+          "service_complaint": 3,
+          "praise": 3,
+          "flight_disruption": 20,
+          "other": 3,
+          "refund_or_compensation": 2,
+          "booking_change": 1,
+          "baggage_issue": 1
+        },
+        "policy_question": {
+          "service_complaint": 4,
+          "flight_disruption": 1,
+          "refund_or_compensation": 1,
+          "baggage_issue": 1,
+          "booking_change": 1
+        },
+        "loyalty_account": {
+          "loyalty_account": 1,
+          "seat_or_upgrade": 1,
+          "refund_or_compensation": 1,
+          "flight_disruption": 1
+        },
+        "booking_change": {
+          "booking_change": 4,
+          "other": 1,
+          "flight_disruption": 1,
+          "policy_question": 3,
+          "praise": 1,
+          "loyalty_account": 1
+        }
+      }
+    },
+    "routing": {
+      "n": 220,
+      "escalation_precision": 0.298,
+      "escalation_recall": 0.984,
+      "escalation_f1": 0.458,
+      "false_auto_rate": 0.016,
+      "false_auto_count": 1,
+      "needless_escalation_rate": 0.93,
+      "needless_escalation_count": 146,
+      "automation_rate": 0.055,
+      "safe_automation_rate": 0.05,
+      "safe_automation_ci": [
+        0.022727272727272728,
+        0.07738636363636302
+      ],
+      "accuracy": 0.332,
+      "counts": {
+        "tp": 62,
+        "fp": 146,
+        "fn": 1,
+        "tn": 11
+      }
+    },
+    "by_stratum": {
+      "representative": {
+        "n": 120,
+        "intent_accuracy": 0.35,
+        "intent_accuracy_ci": [
+          0.26666666666666666,
+          0.43333333333333335
+        ],
+        "intent_macro_f1": 0.303,
+        "routing": {
+          "n": 120,
+          "escalation_precision": 0.15,
+          "escalation_recall": 0.944,
+          "escalation_f1": 0.26,
+          "false_auto_rate": 0.056,
+          "false_auto_count": 1,
+          "needless_escalation_rate": 0.941,
+          "needless_escalation_count": 96,
+          "automation_rate": 0.058,
+          "safe_automation_rate": 0.05,
+          "safe_automation_ci": [
+            0.016666666666666666,
+            0.09166666666666666
+          ],
+          "accuracy": 0.192,
+          "counts": {
+            "tp": 17,
+            "fp": 96,
+            "fn": 1,
+            "tn": 6
+          }
+        }
+      },
+      "enriched": {
+        "n": 100,
+        "intent_accuracy": 0.5,
+        "intent_accuracy_ci": [
+          0.4,
+          0.6
+        ],
+        "intent_macro_f1": 0.445,
+        "routing": {
+          "n": 100,
+          "escalation_precision": 0.474,
+          "escalation_recall": 1.0,
+          "escalation_f1": 0.643,
+          "false_auto_rate": 0.0,
+          "false_auto_count": 0,
+          "needless_escalation_rate": 0.909,
+          "needless_escalation_count": 50,
+          "automation_rate": 0.05,
+          "safe_automation_rate": 0.05,
+          "safe_automation_ci": [
+            0.01,
+            0.09
+          ],
+          "accuracy": 0.5,
+          "counts": {
+            "tp": 45,
+            "fp": 50,
+            "fn": 0,
+            "tn": 5
+          }
+        }
+      }
+    }
+  }
+]

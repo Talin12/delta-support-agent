@@ -1,0 +1,8 @@
+pandas>=2.2
+numpy>=1.26
+scikit-learn>=1.5
+requests>=2.31
+python-dotenv>=1.0
+tqdm>=4.66
+rapidfuzz>=3.9
+kaggle>=1.6

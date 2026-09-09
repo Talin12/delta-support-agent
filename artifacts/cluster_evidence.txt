@@ -1,0 +1,191 @@
+CLUSTER 0 (n=2345)
+  distinctive terms: flight, delta, flights, just, flying, thank, time, check, fly, today, airline, plane
+  sample messages:
+    - "I wanted to check if I Am allowed to carryon a pulley and a backpack."
+    - "I know I post about this a lot but... I really freaking love ."
+    - "hey stuck here in Tulsa. Time for you guys to mothball these crap planes"
+    - "B7A agent at Sea Tac was the most rude, non empathetic employee you have. Should I give her a hug? 💀🤘🍆"
+    - "Fatima from is a lifesaver! She helped me personally find my passport left on a flight 1.5hr before my intl departure!"
+    - "I just booked two random trips just so I can level up status on #FirstWorldProblems #whatalife #soullikewheels #gypsysoul"
+    - "clearly dl5511 from Atlanta to Monterrey, Mexico will not be departing on time. Any update would be appreciated."
+    - "Hey what’s up with the app? Not working any thoughts"
+
+CLUSTER 1 (n=178)
+  distinctive terms: bag, check, check bag, checked bag, checked, lost bag, lost, link, flight, carry, baggage, plane
+  sample messages:
+    - "please don’t leave bag #dl432440 behind for Flight 1961 to ATL. All bags but that one on board."
+    - "After a great Irish trip, my bag is in purgatory btwn LGA and MHT, and baggage services can't confirm. Can you help?"
+    - "need an umbrella for this nasty weather on way to airport but not checking a bag - can I carry on?"
+    - "Wow - lost my bag. This has never happened to me before. I’m stunned that you all are trying to blame"
+    - "your staff digged through my checked bag and stole my go pro, either in Fort Lauderdale or JFK, seriously?"
+    - "Newark bag drop line for online check-in is stacked 15 ppl deep. Got here two hours early and worried that I'll miss my flight."
+    - "TY to crew on 4627. Had a bag that wouldn’t fit overhead or under the seat but had a c-pap so flight attndant stored it #favairline"
+    - "does CLT have curbside bag ck & if so how early does is open a.m.?"
+
+CLUSTER 2 (n=120)
+  distinctive terms: going, flight, link, plane, hey, delta, like, going miss, delayed, help, long, going make
+  sample messages:
+    - "The ATL airport has it going on tonight. Well done ATL & . Reminds me of a friend of mine... 's moves <link>"
+    - "flying in me from Heathrow Wednesday morning to JFK to celebrate my 60th Birthday 🍰 in New York City buzzing the celebrate my birthday in this city and Happy Delta are going to get me there can not wait see you wed .🛫✈️"
+    - "After today I don’t want to fly with looks like I’m going back to"
+    - "Thanks #TmobileWingman for the free in flight Wi-Fi :) It's nice that I can keep tge conversation going even while in the air <link>"
+    - "I am going to die on this plane. Friends, please hold accountable."
+    - "What in earth is going on with your service in Detroit tonight? This is insane in a very bad way."
+    - "waited an hour on the plane only to be informed that I was going to miss my connection because of mechanical issues. Late for work meetings and family gathering now. I enjoy flying Delta, but this experience has made me "
+    - "your flight attendant threw my friends phone in the garbage when he was throwing out the food trays while my friend napped! Now it’s broken after she dug through the garbage for it !!!! What are you going to do about thi"
+
+CLUSTER 3 (n=348)
+  distinctive terms: thanks, link, flight, thanks link, home, getting, delta, day, great, travel, time, thanks getting
+  sample messages:
+    - "Flight delays thanks to maintenance on aircraft. Will miss my connection + later flight has no seats. Tomorrow morning then. Thanks"
+    - "can I DM with you please! Thanks"
+    - "Thanks to Ty at for turning my travel plans around!!! Kudos to great employees working hard during the holiday season"
+    - "Thanks for inviting me to participate in a contest and when I register you say I'm not eligible. What a farce. <link>"
+    - "Thanks for giving me the 46th of 49 and 17 of 18 rows on my flight home. Definitely easier getting to the back of a plane with crutches. The elderly lady with a cane that sat behind me thought so too. #WhyNoHandicapAirli"
+    - "airplane sunrises are my fav and truly the only reason why i choose to travel early mornings. oh and shoutout to this wifi, thanks <link>"
+    - "Dane Count airport and crew of #1481 to DTW - awesome job getting to Detroit early. Making up a 50 minute delay on the inbound aircraft. you never let me down. Thanks!"
+    - "Wow thanks for just providing an absolutely terrible customer experience."
+
+CLUSTER 4 (n=225)
+  distinctive terms: crew, flight, attendant, flight attendant, flight crew, great, great flight, atl, awesome, crew flight, amazing, today
+  sample messages:
+    - "Flight attendant to our row, “I appreciate all of your beards.” I really don’t even need Thanksgiving anymore. Holiday=Made. thank you for your wonderful staff 😂"
+    - "the delta one crew from JFK to ZRH was fantastic! Great people and even better service!"
+    - "you’re better than this. Flight crew late. Now mech issue reported by “tower”. A lav issue would not be reported by the tower. MSP DL1740."
+    - "We❤️❤️❤️the Delta Ground Crew in OKC!!! Emily and her coworkers are the BEST!!!"
+    - "Greeted on my flight by a flight attendant fan headed to Morgantown on Saturday for Texas game. Let’s Go Mountaineers!"
+    - "Also, BIG shoutout to the crew on my GIG/ATL flight. Great work and understanding ensured a MUCH more comfortable flight. THANK YOU!"
+    - "a big shout out to Lisa our first class flight attendant in flight 2088 Atl to Lit today. Great job! Super attentive! Love Lisa!!!!"
+    - "flight attendant Candie on DL1696 was fantastic. She made putting luggage in overhead compartments a pleasure. Thank you!"
+
+CLUSTER 5 (n=304)
+  distinctive terms: help, upgrade, flight, seats, tomorrow, list, delta, trying, app, flight tomorrow, comfort, just
+  sample messages:
+    - "no ability to upgrade an existing ticket for under $5k one way?! Second guessing my switch over from American Platinum."
+    - "correction. It was Laura in the MSP sky lounge who tried to help. In the end another passenger switched seats with us."
+    - "I’m gold status, and no one seems to be able to help me move to economy comfort even though it’s less than 72 hours for my flight"
+    - "While everyone is asleep 👀 Can I get a first class upgrade for my flight on Tuesday ... 🤓"
+    - "your new upgrade to your delta app does not allow me to continue as a guest on my iPad. It's hidden at the bottom. Can't select!"
+    - "Hey DAL! Excited because I hit Silver today! But my return flight isn’t qual. 4 upgrades because it’s processing on ur end. Help plz?"
+    - "Thank you, , for the first class upgrade to #NAS! #feelingfirstclass #happy"
+    - "who can help me get back to Toronto?"
+
+CLUSTER 6 (n=260)
+  distinctive terms: delayed, flight, flight delayed, delayed hours, hours, delayed flight, connection, flights, plane, time, link, getting delayed
+  sample messages:
+    - "My flight was delayed but pretty much right away, put me on a direct flight to and will get me home sooner tonight!😃"
+    - "My inbound is delayed.Will miss connecting ATL-DTW flight KLM 7262 @ 4:20.Please confirm 5:45 departure. Locator G38T30"
+    - "thanks for yet another delayed flight. Losing a personal day from work and having to sleep in the terminal tonight. #deltaproblems"
+    - "Ohhh ... this was not a good travel day. 1st flight all bathrooms broke. 2nd flight delayed. Bag lost. Dinner plans ruined..."
+    - "please get my delayed bag to me. It’s been over 26 hours since it was delayed still no status on delivery time frame. DL 973444"
+    - "can you tell me why my flight keeps getting delayed, and is it going to keep getting delayed?"
+    - "why was my flight from MSP to Omaha delayed for 2 hours? I have midterms this week, need sleep, and had to stay up late bc of YOU"
+    - "every Monday morning delta flight from Atlanta to Charlotte delayed by 30-40 Min for total flight time is 35 Min."
+
+CLUSTER 7 (n=243)
+  distinctive terms: seat, middle, flight, window, upgrade, middle seat, comfort, aisle, link, window seat, paid, aisle seat
+  sample messages:
+    - ", so I checked in for my MEM-ATL flight tomorrow and it says that my seat will be assigned at gate, am I in danger of not getting one?"
+    - "Shout out to for great service at the gate and helping to seat my fiancée and I together after we lost original seat assignments."
+    - "traveling from LAS, I get updated to comfort seat but a middle seat in my book that's should have a choice to accept it or decline"
+    - "Landed in ATL. Have a bone to pick with . Got bumped from my Nov 7 flight so am now a day late due to their flight being delayed (OAJ-ATL). Now they’re telling me im in a middle seat for my long haul (ATL-NRT) when I ori"
+    - "I'm confused on flight 5336 I'm next on upgrade list but we are taking off with an empty seat in 1st class. Why not upgraded?"
+    - "DL 5469 - Can the tray table just be removed? Silly to delay a flight for a tray table on an unoccupied seat heading into a hub."
+    - "Any way you can help a loyal #skymiles card holder get a seat assignment when his company messed up his ticket???🙏🏻"
+    - "My experience tonight. Old regional jet: Mechanical delay /Broken seat / circled LGA for an hour / Parking jet in middle of no where / Bus to terminal. Poor performance tonight."
+
+CLUSTER 8 (n=224)
+  distinctive terms: hour, hold, delay, wait, hour delay, time, flight, hours, hour wait, hold time, phone, plane
+  sample messages:
+    - "On hold for two hours, finally got through to a CSR who put me back on hold with another wait time of 2-4 hours for a flight that I’m being threatened to be bumped off of a day in advance. Thanks for “valuing my time”, d"
+    - "What is the point of a ticket desk if nobody is there to work it . Been over a half hour"
+    - "thanks for not giving anyone info about our 3 hour delay"
+    - "I don't have time to wait on hold for over an hour and I am not waiting for a call back. Can you DM me asap - thanks"
+    - "Hey . Please start a direct from CMH to PHL. AA let us off on the tarmac in the rain. Now almost an hour into baggage wait. NEED YOU!"
+    - "I have been on hold for the past 2 hours and I have yet to have my problem solved. Can someone answer my call PLEASE!!!"
+    - "is not useful. Overseas and no representative for one hour?"
+    - "on hold 30 minutes... and counting really?"
+
+CLUSTER 9 (n=222)
+  distinctive terms: gate, gate agent, agent, gate agents, agents, flight, plane, waiting, just, late, hey, minutes
+  sample messages:
+    - "Wow, 2 of the ladies at MSP Gate G11 got up on the wrong side of the bed this morning"
+    - "Stacy and Yvonne are the best Delta Agents. They are in MSP gate 15! Woot! #delta #feelthelove"
+    - "At gate 1min after doors close because of #incompetence . 20min wait for inspection of an apple. Thanks for #nevermakinguswait"
+    - "seriously? then finally sends me to the gate where there are at least 800 people standing still...while my plane is boarding..."
+    - "I know I said I'd never fly again, but after 17hrs (not 12) trapped on heartless 's (maintenance; poor gate planning), I may."
+    - "15 of us check bags gate-side at JFK and they didn't make it to DCA. They are unaccounted for. Hold time is 25 mins. Please help now!"
+    - "My flight 447 was delayed like crazy today and the gate agents/crew were all absolutely incredible under the pressure of the angry mob. I would have cried and quit a thousand times. They deserve the highest praise."
+    - "Gate, ground, and in-flight crews all passive aggressively refusing to talk to each other. And now DL employee paperwork error causing delay. Get it together DL5905"
+
+CLUSTER 10 (n=159)
+  distinctive terms: change, change flight, flight, trying change, help, need change, trying, fee, need, change fee, phone, hours
+  sample messages:
+    - "trying to reach a specialist to change a flight-impossible to get someone who can help on the phone today and website has an “error”"
+    - "is someone going to help us with a change in flights???"
+    - "What's up with your 2hr+ wait time to change flight with rep?"
+    - "I'm an idiot and didn't change the time on my phone. Shoutout to for calling me to board my flight just in time! 🙏🏾🙏🏾🙏🏾🙏🏾🙏🏾"
+    - "Need to change a flight to a day earlier. How's the best way to do that? Thx"
+    - "This is why I am in love with !!! Always making the best change for the community/employees. THANK YOU ❤️❤️👏🏽👏🏽"
+    - "hi, is it possible for me to change my departure time?"
+    - "Do you have any change policy for Tropical Storm #Nate? My meeting in New Orleans was just cancelled, and Nashville is questionable."
+
+CLUSTER 11 (n=79)
+  distinctive terms: club, sky club, sky, link, mi, fl link, fl, delta sky, mi link, ny link, tampa fl, detroit
+  sample messages:
+    - "between a flight last night and the delta sky club I misplaced my wallet. Help!"
+    - "Best sky club for catching a quick snooze after a red eye and before my connecting flight at DTW?"
+    - "🍽 (at Sky Club in East Elmhurst, NY) <link>"
+    - "I'm at Sky Club in Detroit, MI <link>"
+    - "I'm at Sky Club in Tampa, FL <link>"
+    - "Luz J. is the best Sky Club bartender in the country....by far!!!! She deserves to be recognized."
+    - "NOLA / MSY Sky Club crushin’ I️t today with oysters, shrimp, and jambalaya. <link>"
+    - "please pass along kudos and thanks to Antoine and Bridget B. In the Atlanta sky club. They are exactly what the world needs right now #classy #thoughtful #belikeantoine #belikebridget #DeltaAirlines"
+
+CLUSTER 12 (n=131)
+  distinctive terms: miles, account, sky miles, flight, sky, delta, miles account, use, upgrade, want, skymiles, trying
+  sample messages:
+    - "Flew more than enough miles on to make gold #skymiles next year, but didn’t spend enough $... Last year I was within $250 but again penalized for being frugal? <link>"
+    - "Is it possible to merge two reservations? Two family members traveling together, one bought with miles, one with Delta AMEX."
+    - "how can I tell how many sky miles I have?"
+    - "Progress being made, thx to Onward and upward. Miles to go before we sleep. <link>"
+    - "DL65 tonight was the worst flight experience ever. I have flown almost 20k miles in last 5 weeks with Delta. Really disappointed."
+    - "so if I have 28K miles available in my account, can I use them towards a flight that requires 66K?"
+    - "can someone please explain transferring miles? It appears that transferring miles is essentially re-buying all of the miles."
+    - "your medical emergency flights don't combine with miles? For emergencies? Trying to put together a flight and you lose"
+
+CLUSTER 13 (n=171)
+  distinctive terms: need, need help, help, flight, assistance, dm, add, cancel, creamers, add nondairy, nondairy vegan, nondairy
+  sample messages:
+    - "Holding already 53 mins - how much longer will it be? Need help as you won't online - what else can I do?"
+    - "do I need to call ahead of time if I want my dog to fly in the cabin with me? If yes, what is a reasonable time period to call? And, what do the dimensions need to be for her crate? She's rather long."
+    - "flying tomorrow with an infant in arms. What do I need to do?"
+    - "I am in need of reservation assistance ASAP"
+    - "Are you guys planning on having black Friday deals from the US? I need to buy a lot of tickets"
+    - "I need you to get me my lost luggage ASAP. Sitting on hold FOREVER is not helping my day get any better or my attitude toward Delta right now."
+    - "y’all need to get your staff on flight 1916. #TerribleCustomerService"
+    - "Need 2 speak 2 a rep that has at least half a brain ASAP b/c the rep I just spoke w/ suggested that I DRIVE from Seoul, South Korea to Bali, Indonesia. Not only is it an 8 hr FLIGHT but Bali is an island. I’m open 2 flyi"
+
+CLUSTER 14 (n=247)
+  distinctive terms: customer service, customer, service, great, great customer, today, thank, delta, best, flight, thanks, time
+  sample messages:
+    - "Thanks Richmond, Va. Ms. Danise W. for the rebooking when my husband and I missed our flight. We flight delta and love the customer service."
+    - "Just had the very best customer service from - wouldn’t fly anyone else!!"
+    - "i just wanted to say thank you for the amazing customer service as i needed my flight changed two days later. you guys are awesome."
+    - "I don't know what is going on with Delta recently- I used to be really impressed by their customer service and support. No longer the case. I've been trying to connect all day (now waiting 3hr) for callback. Found error "
+    - "your customer service sucks at picking up the phone. my moms been on hold for nearly 2 hours like what the fuck."
+    - "I need your assistance please. My flight from Tahiti has been delayed by 13 hrs and I will miss my connection in LAX. Can't get through to customer service."
+    - "I just had a fantastic customer experience with Genesis, a customer service rep! #Delta #superiorcustomerexperience #customerservice"
+    - "Many thanks for the superb customer service this morning! No issue too big or small! Merry Christmas 🎄🎄"
+
+CLUSTER 15 (n=744)
+  distinctive terms: link, flight, thank, link link, time, home, travel, love, day, today, fly, delta
+  sample messages:
+    - "Great 2 fly NS during #sunset ATL TPA Thank you for safe travels DL103/15 Awesome FLL ATL crews <link>"
+    - "Cute scene at LGA this morning with this pilot. He's making these kids' day! <link>"
+    - "A A350 landing in Minneapolis on delivery from Toulouse. <link> © Christoph P. Lundberg <link>"
+    - "The new Laguardia airport <link>"
+    - "It can't be "on time" if it's 1:07 and the flight was scheduled to depart at 1:05 #travelday <link>"
+    - "Thank you for helping my son find his football! <link>"
+    - "no staff at sky priority desk at SFO for the past 10 mins <link>"
+    - "Wow. #Japan you were so much. Almost time to board that #777. I can’t wait to come back… <link>"

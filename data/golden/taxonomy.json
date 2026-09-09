@@ -1,0 +1,110 @@
+{
+  "brand": "Delta",
+  "version": "1.0",
+  "catch_all": "other",
+  "design_note": "Derived from 16 TF-IDF/KMeans clusters over 6,000 first-contact Delta messages (artifacts/cluster_evidence.txt). The clusters are TOPICAL, not intent-bearing: cluster 4 ('crew') and cluster 9 ('gate') each contain both effusive praise and furious complaints, because they cluster on shared vocabulary. So the clusters were used as evidence of what Delta's traffic is ABOUT, and the taxonomy was then cut along the axis that actually matters operationally: what support has to DO next. Two intents exist only if they imply different actions.",
+  "intents": [
+    {
+      "name": "flight_disruption",
+      "description": "A flight is delayed, cancelled, diverted, or the customer has missed or expects to miss a connection, and they want status or to be rebooked.",
+      "boundary": "vs booking_change: disruption is initiated by Delta (irregular operations); booking_change is initiated by the customer for their own reasons. If the customer caused the change, it is booking_change.",
+      "source_clusters": [2, 6, 8],
+      "example_messages": [
+        "My inbound is delayed. Will miss connecting ATL-DTW flight KLM 7262 at 4:20. Please confirm 5:45 departure. Locator G38T30",
+        "can you tell me why my flight keeps getting delayed, and is it going to keep getting delayed?"
+      ]
+    },
+    {
+      "name": "baggage_issue",
+      "description": "A checked or gate-checked bag is lost, delayed, damaged, or had contents missing, or the customer is asking about the status of a bag claim.",
+      "boundary": "vs policy_question: an existing bag with a problem is baggage_issue; a pre-travel question about what is allowed to be carried ('can I carry on an umbrella?') is policy_question.",
+      "source_clusters": [1],
+      "example_messages": [
+        "After a great Irish trip, my bag is in purgatory btwn LGA and MHT, and baggage services can't confirm. Can you help?",
+        "please get my delayed bag to me. It's been over 26 hours since it was delayed still no status on delivery time frame. DL 973444"
+      ]
+    },
+    {
+      "name": "booking_change",
+      "description": "The customer wants to change, cancel, rebook, or obtain a refund on an existing reservation, or is asking about change fees and change policy.",
+      "boundary": "vs flight_disruption: the trigger is the customer's own schedule, not a Delta operational failure. vs seat_or_upgrade: changing the flight itself, not the seat within it.",
+      "source_clusters": [10],
+      "example_messages": [
+        "Need to change a flight to a day earlier. How's the best way to do that? Thx",
+        "Do you have any change policy for Tropical Storm #Nate? My meeting in New Orleans was just cancelled"
+      ]
+    },
+    {
+      "name": "refund_or_compensation",
+      "description": "The customer wants money or its equivalent back: a refund, a duplicate-charge reversal, reimbursement, goodwill compensation, or miles as redress.",
+      "boundary": "vs booking_change: booking_change is about altering the itinerary; this is about the money. vs service_complaint: a grievance becomes this intent the moment redress is requested or clearly implied.",
+      "source_clusters": [],
+      "added_during_labelling": true,
+      "why_added": "The clustering never surfaced this as its own cluster because refund language is spread thinly across every topic (delays, bags, Wi-Fi, seats, miles) and so never dominated a centroid. It became unmissable during hand-labelling: it is both frequent and the single highest-stakes thing the agent can get wrong, since it commits real money. This is the clearest example of why unsupervised structure was treated as evidence rather than as the answer.",
+      "example_messages": [
+        "I was charged twice for two separate flights, can you assist me?",
+        "my flight out of BOS to JFK was delayed which caused me to miss my connection. I would like to know what you can do as far as compensation"
+      ]
+    },
+    {
+      "name": "seat_or_upgrade",
+      "description": "Anything about the seat within an existing flight: seat assignment, seat change, being separated from a companion, upgrade requests, or upgrade/standby list position.",
+      "boundary": "vs loyalty_account: an upgrade request is seat_or_upgrade even when the customer cites their status; loyalty_account is about the miles/status balance itself, not about applying it to a specific seat.",
+      "source_clusters": [5, 7],
+      "example_messages": [
+        "I'm confused on flight 5336 I'm next on upgrade list but we are taking off with an empty seat in 1st class. Why not upgraded?",
+        "I checked in for my MEM-ATL flight tomorrow and it says that my seat will be assigned at gate, am I in danger of not getting one?"
+      ]
+    },
+    {
+      "name": "loyalty_account",
+      "description": "SkyMiles account matters: miles balance, earning, redeeming, transferring, status qualification, or account access and password problems.",
+      "boundary": "vs seat_or_upgrade: this is about the account and its miles/status as such. Using miles to book or upgrade a specific trip is seat_or_upgrade or booking_change.",
+      "source_clusters": [12],
+      "example_messages": [
+        "so if I have 28K miles available in my account, can I use them towards a flight that requires 66K?",
+        "need some password reset help. Thanks"
+      ]
+    },
+    {
+      "name": "policy_question",
+      "description": "A pre-travel informational question with no current problem: what is allowed, how does something work, timing and procedure, or how to use the app or website.",
+      "boundary": "vs any issue intent: nothing has gone wrong yet. The customer is asking rather than reporting. If they are reporting a failure, classify by the failure.",
+      "source_clusters": [13, 1],
+      "example_messages": [
+        "do I need to call ahead of time if I want my dog to fly in the cabin with me? What do the crate dimensions need to be?",
+        "does CLT have curbside bag ck & if so how early does is open a.m.?"
+      ]
+    },
+    {
+      "name": "service_complaint",
+      "description": "Dissatisfaction with staff conduct, service quality, aircraft condition, or the inability to reach support (hold times, phone queues), where the customer wants acknowledgment and recovery rather than one specific transaction.",
+      "boundary": "vs the transactional intents: if a concrete action would resolve it (rebook me, find my bag), use that intent. Use service_complaint when the substance is the grievance itself. Complaints about being unable to reach an agent live here, because the recovery action is the same: acknowledge and open a working channel.",
+      "source_clusters": [8, 9, 14, 2],
+      "example_messages": [
+        "B7A agent at Sea Tac was the most rude, non empathetic employee you have.",
+        "I have been on hold for the past 2 hours and I have yet to have my problem solved."
+      ]
+    },
+    {
+      "name": "praise",
+      "description": "Compliments, thanks, and shout-outs to specific employees or to the airline, with no outstanding request.",
+      "boundary": "vs service_complaint: pure valence flip on the same topics. A message that praises staff but then raises a problem is classified by the problem, not the praise.",
+      "source_clusters": [4, 11, 14, 3],
+      "example_messages": [
+        "a big shout out to Lisa our first class flight attendant in flight 2088 Atl to Lit today. Great job!",
+        "the delta one crew from JFK to ZRH was fantastic! Great people and even better service!"
+      ]
+    },
+    {
+      "name": "other",
+      "description": "Catch-all: general chatter, photos, aviation enthusiasm, messages aimed at other accounts, or text too vague to determine what the customer wants.",
+      "boundary": "Use only when no other intent applies, never merely because two intents seem close.",
+      "source_clusters": [15, 0],
+      "example_messages": [
+        "A A350 landing in Minneapolis on delivery from Toulouse.",
+        "I'm at Sky Club in Detroit, MI"
+      ]
+    }
+  ]
+}

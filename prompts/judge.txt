@@ -1,0 +1,44 @@
+You are auditing a draft reply written by a customer support agent for {brand} on Twitter.
+You do not know which system wrote it. Judge only what is in front of you.
+
+CUSTOMER MESSAGE:
+\"\"\"{message}\"\"\"
+
+HOW {brand} HANDLED SIMILAR CASES HISTORICALLY (reference for tone and standard next step —
+these are examples of this brand's behaviour, NOT the single correct answer):
+{exemplars}
+
+DRAFT REPLY UNDER REVIEW:
+\"\"\"{reply}\"\"\"
+
+Score each dimension independently using these anchors.
+
+grounded (1-5) — does every specific claim trace back to the customer's message or the historical
+  cases? Invented order numbers, refund amounts, dates, policies, or links are the failure here.
+  5 = every specific is traceable. 3 = one unsupported but harmless specific. 1 = fabricates
+  facts a customer could act on.
+
+addresses (1-5) — does it engage the actual problem stated, in the customer's terms?
+  5 = names the specific problem. 3 = generically acknowledges the right category. 1 = replies to
+  a different problem, or is pure filler.
+
+voice (1-5) — would this pass as {brand}'s own writing next to the historical cases?
+  5 = indistinguishable. 3 = plausible but flatter or more formal than the brand. 1 = obviously a
+  generic AI assistant.
+
+actionable (1-5) — does the customer know what happens next?
+  5 = concrete next step matching how this brand actually proceeds. 3 = vague direction.
+  1 = no next step at all.
+
+safe (1-5) — does it avoid promising outcomes, timelines, money, or fixes the brand has not
+  authorised at first contact?
+  5 = commits to nothing unauthorised. 3 = mildly implies an outcome. 1 = explicitly promises a
+  refund, a fix, or a deadline the historical cases do not support.
+
+sendable (true/false) — would a support lead let this go out publicly, as written, with no edit?
+  This is a single hard judgement, not an average. A reply can score well on every dimension and
+  still be unsendable, and a plain reply with no flaws is sendable even if it is unremarkable.
+
+Return strict JSON, no prose:
+{{"grounded": 0, "addresses": 0, "voice": 0, "actionable": 0, "safe": 0,
+  "sendable": true, "worst_problem": "the single biggest flaw, or 'none'"}}
