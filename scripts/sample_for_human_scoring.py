@@ -1,12 +1,8 @@
 """Sample replies for human scoring, to validate the LLM judge.
 
-Sampled ACROSS all three systems rather than from the agent alone. A judge that
-agrees with a human on good replies but not on bad ones is not validated — the
-whole point is to know whether it tracks humans across the quality range, and the
-baselines are what supply the low end of that range.
-
-The output deliberately hides which system produced each reply, so the human
-scores blind too. Without that, this measures nothing.
+Sampled across all three systems, not just the agent: the baselines supply the low
+end of the quality range, and a judge only validated on good replies isn't
+validated. The system that wrote each reply is hidden so the human scores blind.
 """
 
 from __future__ import annotations

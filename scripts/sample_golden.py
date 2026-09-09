@@ -1,19 +1,11 @@
 """Sample threads for the golden evaluation set.
 
-Two strata, because one sample cannot answer both questions we care about:
-
-  representative (n=120) - uniform random over all Delta threads. This is the only
-      slice from which a production estimate can honestly be quoted. Metrics on
-      the pooled set are NOT production estimates and are labelled as such.
-
-  enriched (n=100) - deliberately oversamples the tail that a uniform sample would
-      barely touch: messages that trip an escalation rule, threads that ran long
-      (a proxy for "was hard to resolve"), messages with no close historical
-      precedent, and very short/vague messages. At a ~1% base rate, a uniform
-      sample of 220 would contain roughly two safety-critical messages, which is
-      not enough to measure the thing most likely to cause real harm.
-
-The strata stay tagged in the output so every metric can be reported per-stratum.
+Two strata, tagged in the output so metrics can be reported separately:
+  representative (120) - uniform random; the only slice a production estimate may
+      be quoted from
+  enriched (100) - oversamples rule-triggering, long-running, low-precedent and
+      very short messages. At a ~1.8% base rate a uniform 220 would contain about
+      four safety-critical messages, too few to measure.
 """
 
 from __future__ import annotations

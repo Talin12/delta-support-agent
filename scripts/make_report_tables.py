@@ -1,7 +1,6 @@
 """Render artifacts/results.json into the markdown tables used in the report.
 
-Keeps the report's numbers mechanically derived from the run rather than
-transcribed by hand, so they cannot drift from what the harness actually produced.
+Generated rather than hand-transcribed so the report can't drift from the run.
 """
 
 from __future__ import annotations

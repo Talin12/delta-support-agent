@@ -1,12 +1,9 @@
 """How well does the LLM judge agree with a human?
 
-Without this, every reply-quality number in the report is an unvalidated model
-opinion. Pairs the human scores in data/golden/human_reply_scores.jsonl with the
-judge's scores for the same replies and reports quadratic-weighted kappa per
-dimension, plus agreement on the binary sendable call.
-
-Also reports the judge's bias: a judge that correlates well with humans but sits a
-full point high on every dimension will still overstate absolute quality.
+Pairs the hand scores in data/golden/human_reply_scores.jsonl with the judge's
+scores for the same replies. Reports weighted kappa per dimension, agreement on
+the sendable call, and the judge's bias — a judge can correlate well and still sit
+a point high, which would overstate absolute quality.
 """
 
 from __future__ import annotations

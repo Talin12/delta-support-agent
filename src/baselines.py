@@ -1,18 +1,10 @@
-"""Baselines the full agent has to beat.
+"""Baselines the agent has to beat. Neither uses an LLM.
 
-Two of them, deliberately chosen so the comparison is uncomfortable rather than
-flattering:
-
-  trivial - majority intent, one canned reply, auto-send everything. Establishes the
-            floor and, more usefully, exposes how much of the headline accuracy is
-            just class imbalance.
-
-  simple  - no LLM at inference time. Intent comes from TF-IDF + logistic regression
-            distilled from LLM labels on a held-out pool; the reply is the nearest
-            historical brand reply copied verbatim; routing is the rule layer alone.
-            This is the honest competitor: it costs nothing per ticket, and on a
-            brand whose replies are highly templated it is hard to beat on reply
-            quality. If the full agent cannot clear this, the LLM is not paying rent.
+trivial - majority intent, one canned reply, auto-send everything. Shows how much
+          of any accuracy number is just class imbalance.
+simple  - TF-IDF + logistic regression for intent, nearest historical reply copied
+          verbatim, rules-only routing. Costs nothing per ticket, so if the agent
+          can't clear it the LLM isn't paying rent.
 """
 
 from __future__ import annotations

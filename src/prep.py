@@ -1,9 +1,8 @@
 """Turn the raw twcs.csv dump into per-brand conversation threads.
 
-The raw file is a flat table of tweets linked by in_response_to_tweet_id. A
-support conversation is a connected chain through those links, so we resolve
-every tweet to its thread root and keep the roots whose thread involves the
-brand we are building the agent for.
+The raw file is a flat table of tweets linked by in_response_to_tweet_id, so a
+conversation is a connected chain through those links. Resolve every tweet to its
+thread root, then keep the threads the brand took part in.
 """
 
 from __future__ import annotations

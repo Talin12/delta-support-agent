@@ -1,11 +1,8 @@
-"""Retrieve how the brand historically resolved similar issues.
+"""TF-IDF nearest-neighbour lookup of how the brand handled similar messages.
 
-Grounding the draft matters more than fluency here: the agent should reply the way
-this brand actually replies, not the way a generic assistant would. We index the
-brand's own first-contact messages and hand the model the replies that followed.
-
-Leakage control: any thread in the golden set is excluded from the index, so an
-evaluated message can never retrieve its own historical answer.
+Indexes (customer message -> brand reply) pairs so the draft can be grounded in
+what the brand actually does. Golden-set threads are excluded from the index or an
+evaluated message could retrieve its own answer.
 """
 
 from __future__ import annotations

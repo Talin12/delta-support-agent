@@ -1,13 +1,9 @@
-"""LLM-as-judge for reply quality, plus the agreement analysis that validates it.
+"""LLM-as-judge for reply quality, plus the stats that validate it against a human.
 
-A judge score is worthless until you know how far it drifts from a human. So this
-module does two jobs: it scores replies, and it measures itself against the human
-scores in data/golden/human_reply_scores.jsonl using quadratic-weighted Cohen's
-kappa (the right statistic for ordered 1-5 anchors, since it penalises a 5-vs-1
-disagreement far more than 5-vs-4).
-
-Blinding: replies are scored one at a time with no system identity attached, so the
-judge cannot favour the agent over a baseline it can recognise.
+Replies are scored one at a time with no system identity attached, so the judge
+can't favour a system it recognises. Agreement uses quadratic-weighted Cohen's
+kappa, which suits ordered 1-5 anchors: a 5-vs-1 gap is penalised far more than
+5-vs-4.
 """
 
 from __future__ import annotations

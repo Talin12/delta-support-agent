@@ -1,9 +1,8 @@
 """Extract concrete failure examples from a system's predictions.
 
-Buckets errors by the mechanism that produced them rather than by intent label,
-because "confused A for B" is a symptom and the mechanism is the thing you fix.
-Prints real messages so the report can quote them verbatim instead of describing
-failures in the abstract.
+Buckets errors by mechanism rather than by intent label - "confused A for B" is a
+symptom, the mechanism is what you fix - and prints real messages so the report can
+quote them verbatim.
 """
 
 from __future__ import annotations

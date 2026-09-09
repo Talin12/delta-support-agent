@@ -1,13 +1,8 @@
 """Derive a candidate intent taxonomy from the brand's own traffic.
 
-Two-stage, so the taxonomy is defensible rather than invented at a whiteboard:
-  1. Unsupervised structure  - TF-IDF + KMeans over first customer messages,
-     surfacing the natural clusters and their distinctive terms.
-  2. Naming and merging      - an LLM reads the cluster evidence (top terms plus
-     sampled real messages) and proposes named, mutually exclusive intents.
-
-The human decision of which clusters to keep, merge, or drop is recorded in
-reports/DECISIONS.md; this script produces the evidence that decision rests on.
+Clusters first-contact messages with TF-IDF + KMeans and dumps the top terms and
+sample messages per cluster. Optionally asks an LLM to name the intents; with
+--no-llm it stops at the evidence and the taxonomy is written by hand from it.
 """
 
 from __future__ import annotations

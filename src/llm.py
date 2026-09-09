@@ -1,9 +1,8 @@
-"""Provider-agnostic LLM client with an on-disk response cache.
+"""LLM client for Gemini / Groq / OpenAI / Anthropic, with an on-disk cache.
 
-The cache is the reason a reviewer can reproduce every headline number in this
-repo without holding an API key: each (provider, model, prompt, params) tuple is
-hashed and its response committed to cache/llm_cache.sqlite. Set LLM_OFFLINE=1 to
-replay only, which turns the whole evaluation into a deterministic, free rerun.
+Responses are cached by hash of (model, prompt, params), so reruns are free and
+deterministic. LLM_OFFLINE=1 replays the cache and never hits the network, which
+is how the results reproduce without an API key.
 """
 
 from __future__ import annotations

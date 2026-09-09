@@ -1,10 +1,7 @@
-"""The support agent: classify -> ground -> draft and route.
+"""The support agent: classify -> retrieve -> draft and route.
 
-Three stages rather than one prompt, because they fail differently and need to be
-measured separately. Classification is a closed-set problem with a cheap ground
-truth; drafting is open-ended and needs a judge; routing is a cost-asymmetric
-decision that deserves a rule layer above the model. Fusing them into one call
-would make it impossible to say which stage a failure came from.
+Kept as three stages so a failure can be attributed to one of them. Fusing them
+into a single prompt would be cheaper but untraceable.
 """
 
 from __future__ import annotations

@@ -1,20 +1,13 @@
 """Run every system over the golden set and score it.
 
-Reports three families of metric, because the three stages fail differently:
+Three metric families:
+  intent  - accuracy and macro-F1 (macro-F1 is the honest one on a skewed taxonomy)
+  routing - false-auto and needless-escalation reported separately, never averaged,
+            because auto-sending a case that needed a human costs far more than
+            escalating a routine one
+  reply   - blind LLM-judge rubric scores
 
-  intent  - accuracy and macro-F1. Macro-F1 is the one that matters: accuracy on a
-            skewed taxonomy mostly measures the majority class, which is exactly
-            what the trivial baseline exploits.
-
-  routing - not just precision/recall. The two errors have wildly different costs:
-            auto-sending something that needed a human (false auto) can be a legal
-            or PR incident; escalating something routine just costs an agent a
-            minute. So we report them separately and never average them away.
-
-  reply   - blind LLM-judge rubric scores, reported with bootstrap CIs.
-
-Every headline number carries a 95% bootstrap confidence interval. At n=200 a
-three-point gap is not a result, and the intervals make that impossible to hide.
+Everything carries a 95% bootstrap CI; at n=120 small gaps are not results.
 """
 
 from __future__ import annotations

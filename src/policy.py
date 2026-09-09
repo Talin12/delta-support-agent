@@ -1,13 +1,8 @@
-"""Deterministic escalation rules that sit above the model's own judgement.
+"""Escalation rules that override the model.
 
-An LLM router is fine on the median ticket and unreliable on the tail that actually
-hurts: account compromise, legal threats, safety. Those cases are rare enough that
-they barely move an accuracy number and severe enough that getting one wrong costs
-more than every routine ticket combined. So they are handled by rules the model
-cannot overrule, and the model only decides the cases the rules abstain on.
-
-Each rule is deliberately high-precision. A rule firing means ESCALATE; no rule
-firing means nothing - the model still gets to escalate on its own judgement.
+Safety, legal, fraud and money cases are rare but expensive to get wrong, so they
+are decided by rules instead of by the model. A rule firing forces ESCALATE; no
+rule firing leaves the call to the model.
 """
 
 from __future__ import annotations
