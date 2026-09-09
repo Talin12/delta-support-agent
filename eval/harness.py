@@ -217,7 +217,8 @@ def _run_simple_cv(system: SimpleBaseline, golden: list[dict], seed: int) -> lis
     return [r for r in rows if r is not None]
 
 
-def score_system(name, rows, golden, index, brand, run_judge: bool) -> dict:
+def score_system(name, rows, golden, index, brand, run_judge: bool,
+                 judge_stratum: str = "") -> dict:
     by_id = {g["golden_id"]: g for g in golden}
     y_intent_true = [by_id[r["golden_id"]]["intent"] for r in rows]
     y_intent_pred = [r["intent"] for r in rows]
@@ -227,8 +228,25 @@ def score_system(name, rows, golden, index, brand, run_judge: bool) -> dict:
     correct = [1.0 if t == p else 0.0 for t, p in zip(y_intent_true, y_intent_pred)]
     mf1, per_class = macro_f1(y_intent_true, y_intent_pred)
 
+    # Integrity gate. A row whose LLM call failed is not a prediction; scoring it as
+    # one silently converts an outage into a finding. An earlier run of this harness
+    # did exactly that: 127 quota failures degraded to ESCALATE and presented as an
+    # 80.9% "over-cautious escalation" result.
+    n_errors = sum(1 for r in rows if r.get("error"))
+    error_rate = n_errors / len(rows) if rows else 0.0
+    if n_errors:
+        print(
+            f"  !! {n_errors}/{len(rows)} rows ({error_rate:.1%}) failed with an error. "
+            f"Metrics below are NOT valid."
+        )
+        for sample in [r for r in rows if r.get("error")][:2]:
+            print(f"     e.g. {sample['error'][:130]}")
+
     result = {
         "system": name,
+        "valid": n_errors == 0,
+        "n_errors": n_errors,
+        "error_rate": round(error_rate, 4),
         "intent": {
             "accuracy": round(float(np.mean(correct)), 3),
             "accuracy_ci": bootstrap_ci(correct),
@@ -261,8 +279,19 @@ def score_system(name, rows, golden, index, brand, run_judge: bool) -> dict:
         }
 
     if run_judge:
-        print(f"  [{name}] judging {len(rows)} replies")
+        # Judging is the most quota-hungry stage. Scoping it to one stratum keeps
+        # the cross-system comparison inside a single model's daily budget, which
+        # matters because comparability requires every system judged by the SAME
+        # model — splitting the work across models would silently confound it.
+        judged_rows = (
+            [r for r in rows if by_id[r["golden_id"]]["stratum"] == judge_stratum]
+            if judge_stratum
+            else rows
+        )
+        print(f"  [{name}] judging {len(judged_rows)} replies"
+              + (f" ({judge_stratum} stratum only)" if judge_stratum else ""))
         workers = int(os.environ.get("EVAL_WORKERS", "6"))
+        rows = judged_rows
         scores: list = [None] * len(rows)
         with ThreadPoolExecutor(max_workers=workers) as pool:
             futures = {
@@ -283,8 +312,18 @@ def score_system(name, rows, golden, index, brand, run_judge: bool) -> dict:
                     print(f"    judged {done}/{len(rows)}")
         for row, sc in zip(rows, scores):
             row["judge"] = sc.to_dict()
+        n_judge_errors = sum(1 for s in scores if s.error)
+        if n_judge_errors:
+            print(
+                f"  !! {n_judge_errors}/{len(scores)} judge calls failed. "
+                f"Reply-quality metrics below are NOT valid."
+            )
         sendable = [1.0 if s.sendable else 0.0 for s in scores]
         result["reply_quality"] = {
+            "valid": n_judge_errors == 0,
+            "n_judge_errors": n_judge_errors,
+            "stratum": judge_stratum or "pooled",
+            "n_judged": len(rows),
             "sendable_rate": round(float(np.mean(sendable)), 3),
             "sendable_rate_ci": bootstrap_ci(sendable),
             "mean_overall": round(float(np.mean([s.mean_score() for s in scores])), 3),
@@ -308,6 +347,9 @@ def main() -> None:
     ap.add_argument("--systems", default="trivial,simple,agent")
     ap.add_argument("--limit", type=int, default=0, help="evaluate only the first N golden items")
     ap.add_argument("--no-judge", action="store_true", help="skip LLM judging (fast, free)")
+    ap.add_argument("--judge-stratum", default="",
+                    help="judge only this stratum (e.g. representative), to stay inside a "
+                         "single judge model's daily quota while keeping systems comparable")
     ap.add_argument("--seed", type=int, default=13)
     args = ap.parse_args()
 
@@ -332,7 +374,8 @@ def main() -> None:
             continue
         print(f"\n=== {name} ===")
         rows = run_system(name, systems[name], golden, args.seed)
-        result = score_system(name, rows, golden, index, args.brand, not args.no_judge)
+        result = score_system(name, rows, golden, index, args.brand, not args.no_judge,
+                              judge_stratum=args.judge_stratum)
         results.append(result)
         write_jsonl(rows, ARTIFACTS / f"predictions_{name}.jsonl")
 

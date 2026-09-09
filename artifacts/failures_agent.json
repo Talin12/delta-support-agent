@@ -1,0 +1,52 @@
+{
+  "system": "agent",
+  "n": 220,
+  "false_auto": 6,
+  "needless_escalation": 44,
+  "rule_false_positives": 5,
+  "intent_errors": 40,
+  "link_placeholder_leak": 13,
+  "fabricated_signature": 200,
+  "top_confusions": [
+    [
+      "flight_disruption -> service_complaint",
+      7
+    ],
+    [
+      "booking_change -> policy_question",
+      4
+    ],
+    [
+      "service_complaint -> other",
+      4
+    ],
+    [
+      "other -> praise",
+      3
+    ],
+    [
+      "service_complaint -> policy_question",
+      3
+    ],
+    [
+      "other -> service_complaint",
+      2
+    ],
+    [
+      "service_complaint -> refund_or_compensation",
+      2
+    ],
+    [
+      "other -> policy_question",
+      2
+    ],
+    [
+      "refund_or_compensation -> flight_disruption",
+      2
+    ],
+    [
+      "baggage_issue -> service_complaint",
+      2
+    ]
+  ]
+}

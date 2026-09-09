@@ -40,6 +40,10 @@ class Provider:
     name: str
     model: str
     api_key: str
+    api_keys: tuple[str, ...] = ()
+
+    def keys(self) -> tuple[str, ...]:
+        return self.api_keys or (self.api_key,)
 
 
 def _resolve_provider(model_override: str = "") -> Provider | None:
@@ -56,10 +60,13 @@ def _resolve_provider(model_override: str = "") -> Provider | None:
         ("anthropic", "ANTHROPIC_API_KEY", "ANTHROPIC_MODEL", "claude-sonnet-5"),
     ]
     for name, key_var, model_var, default_model in candidates:
-        key = os.environ.get(key_var, "").strip()
-        if key:
+        # Google meters quota per PROJECT per model, so several keys from different
+        # projects give genuinely independent budgets rather than a shared one.
+        raw = os.environ.get(f"{key_var}S", "") or os.environ.get(key_var, "")
+        keys = tuple(k.strip() for k in raw.split(",") if k.strip())
+        if keys:
             model = model_override or os.environ.get(model_var, default_model).strip()
-            return Provider(name, model, key)
+            return Provider(name, model, keys[0], keys)
     return None
 
 
@@ -132,6 +139,10 @@ class _RateLimiter:
 
 _limiter = _RateLimiter(per_minute=int(os.environ.get("LLM_RPM", "14")))
 
+# Round-robin cursor for spreading requests across API keys.
+_rr_index = 0
+_rr_lock = threading.Lock()
+
 
 def cache_stats() -> dict[str, Any]:
     return _cache.stats()
@@ -158,8 +169,11 @@ class PermanentLLMError(LLMError):
 RETRYABLE_STATUS = {408, 429, 500, 502, 503, 504}
 
 
-def _post_with_retry(url: str, *, headers: dict, payload: dict, attempts: int = 5) -> dict:
-    delay = 2.0
+def _post_with_retry(url: str, *, headers: dict, payload: dict, attempts: int = 7) -> dict:
+    # Free-tier models hit "high demand" 503 spikes that routinely outlast a short
+    # backoff. 7 attempts from 3s doubles out to ~3 minutes of patience, which is
+    # cheaper than a failed run.
+    delay = 3.0
     last: Exception | None = None
     for attempt in range(attempts):
         try:
@@ -296,25 +310,45 @@ def complete(
             "(free, no credit card: https://aistudio.google.com/apikey)."
         )
 
-    _limiter.acquire(provider.model)
+    # Round-robin the STARTING key rather than always beginning at key one.
+    # Rotating only on failure sends every request to the first key and queues the
+    # whole run behind that key's rate limit while the others sit idle; starting at
+    # a different offset each call spreads load across all projects, and the
+    # remaining keys still act as failover when one is exhausted.
+    all_keys = provider.keys()
+    with _rr_lock:
+        global _rr_index
+        start = _rr_index % len(all_keys)
+        _rr_index += 1
+    ordered = all_keys[start:] + all_keys[:start]
 
-    if provider.name == "gemini":
-        text = _call_gemini(provider, system, prompt, temperature, max_tokens)
-    elif provider.name == "groq":
-        text = _call_openai_compatible(
-            provider, "https://api.groq.com/openai/v1", system, prompt, temperature, max_tokens
-        )
-    elif provider.name == "openai":
-        text = _call_openai_compatible(
-            provider, "https://api.openai.com/v1", system, prompt, temperature, max_tokens
-        )
-    elif provider.name == "anthropic":
-        text = _call_anthropic(provider, system, prompt, temperature, max_tokens)
-    else:
-        raise LLMError(f"unknown provider {provider.name}")
+    last_error: Exception | None = None
+    for api_key in ordered:
+        attempt = Provider(provider.name, provider.model, api_key)
+        # Quota is per project per model, so throttle each pairing separately.
+        _limiter.acquire(f"{provider.model}:{api_key[-6:]}")
+        try:
+            if provider.name == "gemini":
+                text = _call_gemini(attempt, system, prompt, temperature, max_tokens)
+            elif provider.name == "groq":
+                text = _call_openai_compatible(
+                    attempt, "https://api.groq.com/openai/v1", system, prompt, temperature, max_tokens
+                )
+            elif provider.name == "openai":
+                text = _call_openai_compatible(
+                    attempt, "https://api.openai.com/v1", system, prompt, temperature, max_tokens
+                )
+            elif provider.name == "anthropic":
+                text = _call_anthropic(attempt, system, prompt, temperature, max_tokens)
+            else:
+                raise LLMError(f"unknown provider {provider.name}")
+        except LLMError as exc:
+            last_error = exc
+            continue
+        _cache.put(key, model_id, prompt, text)
+        return text
 
-    _cache.put(key, model_id, prompt, text)
-    return text
+    raise LLMError(f"all {len(provider.keys())} key(s) failed: {last_error}")
 
 
 def complete_json(

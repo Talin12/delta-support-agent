@@ -1,0 +1,86 @@
+{
+  "n": 60,
+  "dimensions": {
+    "grounded": {
+      "qwk": 0.436,
+      "qwk_label": "moderate",
+      "exact_agreement": 0.717,
+      "within_one": 0.783,
+      "human_mean": 4.47,
+      "judge_mean": 3.98,
+      "judge_bias": -0.48
+    },
+    "addresses": {
+      "qwk": 0.681,
+      "qwk_label": "substantial",
+      "exact_agreement": 0.417,
+      "within_one": 0.883,
+      "human_mean": 2.82,
+      "judge_mean": 2.78,
+      "judge_bias": -0.03
+    },
+    "voice": {
+      "qwk": 0.733,
+      "qwk_label": "substantial",
+      "exact_agreement": 0.467,
+      "within_one": 0.967,
+      "human_mean": 3.98,
+      "judge_mean": 4.25,
+      "judge_bias": 0.27
+    },
+    "actionable": {
+      "qwk": 0.459,
+      "qwk_label": "moderate",
+      "exact_agreement": 0.25,
+      "within_one": 0.583,
+      "human_mean": 2.88,
+      "judge_mean": 3.33,
+      "judge_bias": 0.45
+    },
+    "safe": {
+      "qwk": -0.038,
+      "qwk_label": "worse than chance",
+      "exact_agreement": 0.9,
+      "within_one": 0.983,
+      "human_mean": 4.92,
+      "judge_mean": 4.97,
+      "judge_bias": 0.05
+    }
+  },
+  "sendable": {
+    "kappa": 0.492,
+    "kappa_label": "moderate",
+    "raw_agreement": 0.75,
+    "human_sendable_rate": 0.617,
+    "judge_sendable_rate": 0.533,
+    "judge_precision_vs_human": 0.844,
+    "judge_recall_vs_human": 0.73
+  },
+  "overall": {
+    "spearman_mean_score": 0.624,
+    "mean_abs_error": 0.497
+  },
+  "by_system": {
+    "agent": {
+      "n": 20,
+      "human_mean": 4.46,
+      "judge_mean": 4.42,
+      "judge_bias": -0.04,
+      "sendable_raw_agreement": 0.8
+    },
+    "simple": {
+      "n": 20,
+      "human_mean": 3.59,
+      "judge_mean": 3.4,
+      "judge_bias": -0.19,
+      "sendable_raw_agreement": 0.7
+    },
+    "trivial": {
+      "n": 20,
+      "human_mean": 3.39,
+      "judge_mean": 3.77,
+      "judge_bias": 0.38,
+      "sendable_raw_agreement": 0.75
+    }
+  }
+}

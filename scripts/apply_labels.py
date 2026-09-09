@@ -258,6 +258,26 @@ def main() -> None:
     taxonomy = json.loads((GOLDEN / "taxonomy.json").read_text())
     valid_intents = {i["name"] for i in taxonomy["intents"]}
 
+    # Labels are keyed by golden_id, but golden_id is just a position in a sampled
+    # file. If re-sampling ever shifts which thread sits at which id, every label
+    # silently attaches to the wrong message and the entire evaluation is quietly
+    # invalid. Verify against the committed golden set before overwriting it.
+    committed = GOLDEN / "golden_set.jsonl"
+    if committed.exists():
+        expected = {r["golden_id"]: r["thread_id"] for r in read_jsonl(committed)}
+        drifted = [
+            r["golden_id"]
+            for r in rows
+            if r["golden_id"] in expected and expected[r["golden_id"]] != r["thread_id"]
+        ]
+        if drifted:
+            raise SystemExit(
+                f"REFUSING TO WRITE: {len(drifted)} golden_ids now point at different "
+                f"threads than the committed golden set (e.g. {drifted[:5]}). The "
+                f"sample changed, so these hand-labels no longer describe these "
+                f"messages. Restore data/golden/golden_set.jsonl or re-label."
+            )
+
     out = []
     for row in rows:
         intent, route, reason = LABELS[row["golden_id"]]

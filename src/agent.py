@@ -80,25 +80,28 @@ class SupportAgent:
         self._fallback = taxonomy.get("catch_all", taxonomy["intents"][-1]["name"])
         self._desc = {i["name"]: i["description"] for i in taxonomy["intents"]}
 
-    def classify(self, message: str) -> tuple[str, float, str]:
+    def classify(self, message: str) -> tuple[str, float, str, str | None]:
         prompt = self.classify_tmpl.format(
             brand=self.brand, taxonomy=format_taxonomy(self.taxonomy), message=message
         )
         try:
             out = llm.complete_json(prompt, temperature=0.0, max_tokens=2000, model_tag="classify",
                                      model_override=os.environ.get("CLASSIFY_MODEL", ""))
-        except Exception:
-            return self._fallback, 0.0, "classifier error"
+        except Exception as exc:
+            # Surfaced as an explicit error rather than a quiet fallback label.
+            # An infrastructure failure scored as a legitimate prediction turns a
+            # broken run into a plausible-looking result.
+            return self._fallback, 0.0, "classifier error", f"classify: {exc}"[:300]
         intent = str(out.get("intent", "")).strip()
         if intent not in self._intent_names:
-            return self._fallback, 0.0, f"model returned unknown intent {intent!r}"
+            return self._fallback, 0.0, f"model returned unknown intent {intent!r}", None
         try:
             conf = float(out.get("confidence", 0.0))
         except (TypeError, ValueError):
             conf = 0.0
-        return intent, max(0.0, min(1.0, conf)), str(out.get("rationale", ""))[:300]
+        return intent, max(0.0, min(1.0, conf)), str(out.get("rationale", ""))[:300], None
 
-    def draft_and_route(self, message: str, intent: str) -> tuple[str, str, str, list]:
+    def draft_and_route(self, message: str, intent: str) -> tuple[str, str, str, list, str | None]:
         exemplars = self.index.search(message, k=self.k)
         prompt = self.draft_tmpl.format(
             brand=self.brand,
@@ -111,17 +114,20 @@ class SupportAgent:
             out = llm.complete_json(prompt, temperature=0.0, max_tokens=3000, model_tag="draft",
                                      model_override=os.environ.get("DRAFT_MODEL", ""))
         except Exception as exc:
-            return "", policy.ESCALATE, f"drafting failed: {exc}", exemplars
+            return "", policy.ESCALATE, "drafting failed", exemplars, f"draft: {exc}"[:300]
         reply = str(out.get("reply", "")).strip()
         route = str(out.get("route", "")).strip().upper()
         if route not in (policy.AUTO, policy.ESCALATE):
             route = policy.ESCALATE
         reason = str(out.get("reason", "")).strip()[:400]
-        return reply, route, reason, exemplars
+        err = "draft: model returned an empty reply" if not reply else None
+        return reply, route, reason, exemplars, err
 
     def handle(self, message: str) -> AgentOutput:
-        intent, confidence, rationale = self.classify(message)
-        reply, model_route, model_reason, exemplars = self.draft_and_route(message, intent)
+        intent, confidence, rationale, classify_err = self.classify(message)
+        reply, model_route, model_reason, exemplars, draft_err = self.draft_and_route(
+            message, intent
+        )
         decision = policy.apply(
             message,
             model_route,
@@ -142,4 +148,5 @@ class SupportAgent:
             model_route=model_route,
             exemplar_thread_ids=[e.thread_id for e in exemplars],
             exemplar_scores=[e.score for e in exemplars],
+            error="; ".join(e for e in (classify_err, draft_err) if e) or None,
         )

@@ -135,7 +135,57 @@ Auto-sending something that needed a human can be a legal or PR incident; escala
 a routine ticket costs an agent a minute. Collapsing them into one accuracy or F1
 number hides the only distinction that matters operationally.
 
-**20. Bootstrap confidence intervals on every headline number.**
+**20. The harness refuses to score a run that contained failures.**
+Added after this bit me hard. The agent's `draft_and_route` caught API exceptions
+and degraded to `ESCALATE` with an empty reply — a reasonable-looking production
+fallback. When 127 of 220 draft calls hit a daily quota cap, the harness dutifully
+scored those degradations as *decisions* and reported an 80.9% "needless
+escalation" rate with a straight face. It reads exactly like a real finding: an
+over-cautious agent that escalates too much. I was one step from writing it up.
+
+Now every stage returns an explicit `error`, and the harness prints a loud warning
+and stamps `valid: false` on any result set containing one. **A fallback that is
+correct in production is a liar in evaluation**, because it converts infrastructure
+failure into a plausible behavioural result. The two contexts need different
+failure semantics.
+
+**21. Judge and generator must be different models — verified, not assumed.**
+The original setup used `gemini-3.5-flash-lite` to draft and
+`gemini-flash-lite-latest` to judge, on the assumption they were independent. They
+share a single 500-requests/day quota, which is how the quota exhaustion was traced
+back to them being **the same underlying model under two names**. So the
+"independent" judge had been grading its own output. Model aliases make
+independence something you have to check empirically rather than infer from the
+name. Drafting now runs on `gemini-3.7-flash` and judging on `gemini-3.5-flash`,
+confirmed to have separate quotas.
+
+**22. Reply judging is scoped to the representative stratum.**
+Comparability demands every system be judged by the *same* model; splitting 660
+judge calls across two models to fit quota would silently confound the comparison.
+Scoping to the 120-example representative slice keeps all three systems under one
+judge inside one daily budget — and that slice is the only one a production
+estimate may be quoted from anyway, so the constraint and the statistics agree.
+
+**23. Fabricated agent initials were excluded from the human `sendable` judgement.**
+91% of agent replies sign off like `*TJF` — invented initials of real Delta staff.
+Scored strictly that is unsendable impersonation, which would push the agent's human
+sendable rate to near zero and swamp every other signal in the judge-agreement
+analysis. It is instead treated as a house-style artefact a sending system would
+fill in, and reported separately as the top failure mode. `grounded` is still docked
+where a reply invents a *customer's* first name, because that is a claim about the
+person rather than a template slot. Stating this matters: a different call here
+moves the agreement numbers substantially.
+
+**24. The label applier refuses to run if the sample drifted.**
+Labels are keyed by `golden_id`, which is just a position in a sampled file. If
+re-sampling ever shifted which thread sits at which id, all 220 hand-labels would
+silently attach to different messages and the whole evaluation would be quietly
+invalid while still producing plausible numbers. `apply_labels.py` now diffs
+`golden_id → thread_id` against the committed golden set and aborts on any mismatch.
+Same principle as Decision 20: the dangerous failure is the one that still looks
+like a result.
+
+**25. Bootstrap confidence intervals on every headline number.**
 At n=120 in the representative slice, a five-point difference is frequently noise.
 The intervals make that impossible to hide, including where they undercut the
 agent's own results.

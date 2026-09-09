@@ -1,6 +1,9 @@
 [
   {
     "system": "trivial",
+    "valid": true,
+    "n_errors": 0,
+    "error_rate": 0.0,
     "intent": {
       "accuracy": 0.223,
       "accuracy_ci": [
@@ -191,10 +194,96 @@
           }
         }
       }
+    },
+    "reply_quality": {
+      "valid": true,
+      "n_judge_errors": 0,
+      "stratum": "representative",
+      "n_judged": 120,
+      "sendable_rate": 0.433,
+      "sendable_rate_ci": [
+        0.34979166666666667,
+        0.525
+      ],
+      "mean_overall": 3.558,
+      "dimensions": {
+        "grounded": {
+          "mean": 3.92,
+          "ci": [
+            3.6166666666666667,
+            4.216666666666667
+          ]
+        },
+        "addresses": {
+          "mean": 2.31,
+          "ci": [
+            2.1497916666666668,
+            2.475
+          ]
+        },
+        "voice": {
+          "mean": 2.79,
+          "ci": [
+            2.591666666666667,
+            3.0
+          ]
+        },
+        "actionable": {
+          "mean": 3.83,
+          "ci": [
+            3.65,
+            4.016666666666667
+          ]
+        },
+        "safe": {
+          "mean": 4.94,
+          "ci": [
+            4.875,
+            4.991666666666666
+          ]
+        }
+      },
+      "worst_problems": [
+        [
+          "none",
+          19
+        ],
+        [
+          "the reply is overly generic and fails to acknowledge the spe",
+          8
+        ],
+        [
+          "the tone is slightly too casual and lacks the brand's signat",
+          5
+        ],
+        [
+          "the reply is completely inappropriate for the context; it tr",
+          4
+        ],
+        [
+          "the reply lacks the brand's signature personalization (using",
+          3
+        ],
+        [
+          "the tone is slightly too casual and generic compared to the ",
+          3
+        ],
+        [
+          "the reply is overly generic and fails to acknowledge the sev",
+          2
+        ],
+        [
+          "the reply is too generic and lacks the brand-specific signat",
+          2
+        ]
+      ]
     }
   },
   {
     "system": "simple",
+    "valid": true,
+    "n_errors": 0,
+    "error_rate": 0.0,
     "intent": {
       "accuracy": 0.418,
       "accuracy_ci": [
@@ -440,6 +529,387 @@
           }
         }
       }
+    },
+    "reply_quality": {
+      "valid": true,
+      "n_judge_errors": 0,
+      "stratum": "representative",
+      "n_judged": 120,
+      "sendable_rate": 0.167,
+      "sendable_rate_ci": [
+        0.10833333333333334,
+        0.23333333333333334
+      ],
+      "mean_overall": 3.387,
+      "dimensions": {
+        "grounded": {
+          "mean": 2.52,
+          "ci": [
+            2.191666666666667,
+            2.866874999999999
+          ]
+        },
+        "addresses": {
+          "mean": 2.19,
+          "ci": [
+            1.95,
+            2.45
+          ]
+        },
+        "voice": {
+          "mean": 4.92,
+          "ci": [
+            4.85,
+            4.983333333333333
+          ]
+        },
+        "actionable": {
+          "mean": 2.44,
+          "ci": [
+            2.1333333333333333,
+            2.7585416666666656
+          ]
+        },
+        "safe": {
+          "mean": 4.86,
+          "ci": [
+            4.733333333333333,
+            4.966666666666667
+          ]
+        }
+      },
+      "worst_problems": [
+        [
+          "none",
+          19
+        ],
+        [
+          "the reply completely ignores the customer's specific questio",
+          2
+        ],
+        [
+          "the reply is a copy-paste of a historical case that is compl",
+          2
+        ],
+        [
+          "the draft is a copy-paste of a response to a completely diff",
+          2
+        ],
+        [
+          "the reply fails to offer any path forward or assistance, lea",
+          2
+        ],
+        [
+          "the draft uses the name 'eric' which was not provided by the",
+          2
+        ],
+        [
+          "the reply is a canned response that ignores the customer's s",
+          2
+        ],
+        [
+          "the draft uses the name 'polly' and 'sean', which are not pr",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "system": "agent",
+    "valid": true,
+    "n_errors": 0,
+    "error_rate": 0.0,
+    "intent": {
+      "accuracy": 0.818,
+      "accuracy_ci": [
+        0.7681818181818182,
+        0.8681818181818182
+      ],
+      "macro_f1": 0.822,
+      "per_class": {
+        "baggage_issue": {
+          "precision": 0.909,
+          "recall": 0.769,
+          "f1": 0.833,
+          "support": 13
+        },
+        "booking_change": {
+          "precision": 0.667,
+          "recall": 0.545,
+          "f1": 0.6,
+          "support": 11
+        },
+        "flight_disruption": {
+          "precision": 0.867,
+          "recall": 0.788,
+          "f1": 0.825,
+          "support": 33
+        },
+        "loyalty_account": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 4
+        },
+        "other": {
+          "precision": 0.862,
+          "recall": 0.758,
+          "f1": 0.806,
+          "support": 33
+        },
+        "policy_question": {
+          "precision": 0.412,
+          "recall": 0.875,
+          "f1": 0.56,
+          "support": 8
+        },
+        "praise": {
+          "precision": 0.9,
+          "recall": 0.964,
+          "f1": 0.931,
+          "support": 28
+        },
+        "refund_or_compensation": {
+          "precision": 0.912,
+          "recall": 0.861,
+          "f1": 0.886,
+          "support": 36
+        },
+        "seat_or_upgrade": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 5
+        },
+        "service_complaint": {
+          "precision": 0.765,
+          "recall": 0.796,
+          "f1": 0.78,
+          "support": 49
+        }
+      },
+      "confusion": {
+        "praise": {
+          "praise": 27,
+          "policy_question": 1
+        },
+        "other": {
+          "other": 25,
+          "service_complaint": 2,
+          "policy_question": 2,
+          "praise": 3,
+          "flight_disruption": 1
+        },
+        "baggage_issue": {
+          "baggage_issue": 10,
+          "refund_or_compensation": 1,
+          "service_complaint": 2
+        },
+        "service_complaint": {
+          "service_complaint": 39,
+          "refund_or_compensation": 2,
+          "flight_disruption": 1,
+          "other": 4,
+          "policy_question": 3
+        },
+        "seat_or_upgrade": {
+          "seat_or_upgrade": 5
+        },
+        "refund_or_compensation": {
+          "refund_or_compensation": 31,
+          "flight_disruption": 2,
+          "baggage_issue": 1,
+          "booking_change": 2
+        },
+        "flight_disruption": {
+          "flight_disruption": 26,
+          "service_complaint": 7
+        },
+        "policy_question": {
+          "policy_question": 7,
+          "booking_change": 1
+        },
+        "loyalty_account": {
+          "loyalty_account": 4
+        },
+        "booking_change": {
+          "booking_change": 6,
+          "policy_question": 4,
+          "service_complaint": 1
+        }
+      }
+    },
+    "routing": {
+      "n": 220,
+      "escalation_precision": 0.564,
+      "escalation_recall": 0.905,
+      "escalation_f1": 0.695,
+      "false_auto_rate": 0.095,
+      "false_auto_count": 6,
+      "needless_escalation_rate": 0.28,
+      "needless_escalation_count": 44,
+      "automation_rate": 0.541,
+      "safe_automation_rate": 0.514,
+      "safe_automation_ci": [
+        0.44545454545454544,
+        0.5772727272727273
+      ],
+      "accuracy": 0.773,
+      "counts": {
+        "tp": 57,
+        "fp": 44,
+        "fn": 6,
+        "tn": 113
+      }
+    },
+    "by_stratum": {
+      "representative": {
+        "n": 120,
+        "intent_accuracy": 0.817,
+        "intent_accuracy_ci": [
+          0.7416666666666667,
+          0.8833333333333333
+        ],
+        "intent_macro_f1": 0.797,
+        "routing": {
+          "n": 120,
+          "escalation_precision": 0.359,
+          "escalation_recall": 0.778,
+          "escalation_f1": 0.491,
+          "false_auto_rate": 0.222,
+          "false_auto_count": 4,
+          "needless_escalation_rate": 0.245,
+          "needless_escalation_count": 25,
+          "automation_rate": 0.675,
+          "safe_automation_rate": 0.642,
+          "safe_automation_ci": [
+            0.55,
+            0.725
+          ],
+          "accuracy": 0.758,
+          "counts": {
+            "tp": 14,
+            "fp": 25,
+            "fn": 4,
+            "tn": 77
+          }
+        }
+      },
+      "enriched": {
+        "n": 100,
+        "intent_accuracy": 0.82,
+        "intent_accuracy_ci": [
+          0.75,
+          0.89
+        ],
+        "intent_macro_f1": 0.812,
+        "routing": {
+          "n": 100,
+          "escalation_precision": 0.694,
+          "escalation_recall": 0.956,
+          "escalation_f1": 0.804,
+          "false_auto_rate": 0.044,
+          "false_auto_count": 2,
+          "needless_escalation_rate": 0.345,
+          "needless_escalation_count": 19,
+          "automation_rate": 0.38,
+          "safe_automation_rate": 0.36,
+          "safe_automation_ci": [
+            0.26,
+            0.45
+          ],
+          "accuracy": 0.79,
+          "counts": {
+            "tp": 43,
+            "fp": 19,
+            "fn": 2,
+            "tn": 36
+          }
+        }
+      }
+    },
+    "reply_quality": {
+      "valid": true,
+      "n_judge_errors": 0,
+      "stratum": "representative",
+      "n_judged": 120,
+      "sendable_rate": 0.8,
+      "sendable_rate_ci": [
+        0.725,
+        0.875
+      ],
+      "mean_overall": 4.42,
+      "dimensions": {
+        "grounded": {
+          "mean": 4.82,
+          "ci": [
+            4.691666666666666,
+            4.925
+          ]
+        },
+        "addresses": {
+          "mean": 4.12,
+          "ci": [
+            3.908125,
+            4.316666666666666
+          ]
+        },
+        "voice": {
+          "mean": 4.89,
+          "ci": [
+            4.808333333333334,
+            4.958333333333333
+          ]
+        },
+        "actionable": {
+          "mean": 3.38,
+          "ci": [
+            3.058333333333333,
+            3.7
+          ]
+        },
+        "safe": {
+          "mean": 4.89,
+          "ci": [
+            4.783333333333333,
+            4.983333333333333
+          ]
+        }
+      },
+      "worst_problems": [
+        [
+          "none",
+          90
+        ],
+        [
+          "the reply is overly generic and fails to acknowledge the spe",
+          2
+        ],
+        [
+          "the reply is too generic; it fails to acknowledge the specif",
+          1
+        ],
+        [
+          "the reply is too vague and lacks a clear call to action or r",
+          1
+        ],
+        [
+          "the reply is completely dismissive of the customer's specifi",
+          1
+        ],
+        [
+          "the reply assumes the customer is at a 'counter' without con",
+          1
+        ],
+        [
+          "the reply is slightly generic and fails to acknowledge the c",
+          1
+        ],
+        [
+          "the reply lacks a concrete next step or commitment to report",
+          1
+        ]
+      ]
     }
   }
 ]
